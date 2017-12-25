@@ -101,5 +101,49 @@ namespace student
             }
 
         }
+
+        public static void Quicksort(Students students, int left = 0, int right = 0)
+        {
+            right = (right == 0) ? students.Count() - 1 : right;
+
+            int i = left, j = right;
+
+            var pivot = students[(i + j) / 2];
+
+            while (i <= j)
+            {
+                while (students[i].CompareTo(pivot) < 0)
+                {
+                    i++;
+                }
+
+                while (students[j].CompareTo(pivot) > 0)
+                {
+                    j--;
+                }
+
+                if (i <= j)
+                {
+                    // Swap
+                    var tmp = students[i];
+                    students[i] = students[j];
+                    students[j] = tmp;
+
+                    i++;
+                    j--;
+                }
+            }
+
+            // Recursive calls
+            if (left < j)
+            {
+                Quicksort(students, left, j);
+            }
+
+            if (i < right)
+            {
+                Quicksort(students, i, right);
+            }
+        }
     }
 }

@@ -47,6 +47,10 @@ namespace program
             Console.WriteLine(ocoll[3] == ocoll[4]);
 
 
+            Students.Quicksort(ocoll);
+            Students.Display(ocoll);
+
+
         }
     }
 

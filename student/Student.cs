@@ -103,7 +103,6 @@ namespace student
             return x < y;
         }
 
-
         public int Compare(Student x, Student y)
         {
             if (x.Year < y.Year)
