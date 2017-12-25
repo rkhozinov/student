@@ -38,6 +38,19 @@ namespace program
             ocoll.Promote();
             Students.Display(ocoll);
 
+
+            Console.WriteLine(ocoll[0] > ocoll[1]);
+            Console.WriteLine(ocoll[1] > ocoll[2]);
+            Console.WriteLine(ocoll[2] > ocoll[3]);
+            Console.WriteLine(ocoll[3] > ocoll[4]);
+            Console.WriteLine(ocoll[3] < ocoll[4]);
+            Console.WriteLine(ocoll[3] == ocoll[4]);
+
+
+            Students.Quicksort(ocoll);
+            Students.Display(ocoll);
+
+
         }
     }
 
