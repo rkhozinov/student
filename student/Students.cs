@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 
 namespace student
@@ -9,6 +10,20 @@ namespace student
     {
         public Students()
         {
+        }
+
+        public Students(string filepath)
+        {
+
+            string[] rows = File.ReadAllLines(filepath);
+
+            foreach (string row in rows)
+            {
+                string[] fields = row.Split(',');
+                Student student = new Student(fields);
+                Items.Add(new Student(fields));
+            }
+
         }
 
         public Students(List<Student> list) : base(list)
@@ -81,9 +96,9 @@ namespace student
             Console.WriteLine();
         }
 
-        public Students GetByLetter(string letter)
+        public Students GetByLetter(char letter)
         {
-            string upper_letter = letter.ToUpper();
+            char upper_letter = char.ToUpper(letter);
             return new Students(Items.Where(student => student.Letter == upper_letter).ToList());
 
         }
@@ -104,7 +119,10 @@ namespace student
 
         public static void Quicksort(Students students, int left = 0, int right = 0)
         {
-            right = (right == 0) ? students.Count() - 1 : right;
+            if (right == 0)
+            {
+                right = students.Count() - 1;
+            }
 
             int i = left, j = right;
 

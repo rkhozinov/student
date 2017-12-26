@@ -13,4 +13,7 @@
     <Compile Remove="EmptyInterface.cs" />
     <Compile Remove="Subnets.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="data\" />
+  </ItemGroup>
 </Project>
