@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 
 namespace student
@@ -9,6 +10,20 @@ namespace student
     {
         public Students()
         {
+        }
+
+        public Students(string filepath)
+        {
+
+            string[] rows = File.ReadAllLines(filepath);
+
+            foreach (string row in rows)
+            {
+                string[] fields = row.Split(',');
+                Student student = new Student(fields);
+                Items.Add(new Student(fields));
+            }
+
         }
 
         public Students(List<Student> list) : base(list)
@@ -81,9 +96,9 @@ namespace student
             Console.WriteLine();
         }
 
-        public Students GetByLetter(string letter)
+        public Students GetByLetter(char letter)
         {
-            string upper_letter = letter.ToUpper();
+            char upper_letter = char.ToUpper(letter);
             return new Students(Items.Where(student => student.Letter == upper_letter).ToList());
 
         }
@@ -102,5 +117,51 @@ namespace student
 
         }
 
+        public static void Quicksort(Students students, int left = 0, int right = 0)
+        {
+            if (right == 0)
+            {
+                right = students.Count() - 1;
+            }
+
+            int i = left, j = right;
+
+            var pivot = students[(i + j) / 2];
+
+            while (i <= j)
+            {
+                while (students[i].CompareTo(pivot) < 0)
+                {
+                    i++;
+                }
+
+                while (students[j].CompareTo(pivot) > 0)
+                {
+                    j--;
+                }
+
+                if (i <= j)
+                {
+                    // Swap
+                    var tmp = students[i];
+                    students[i] = students[j];
+                    students[j] = tmp;
+
+                    i++;
+                    j--;
+                }
+            }
+
+            // Recursive calls
+            if (left < j)
+            {
+                Quicksort(students, left, j);
+            }
+
+            if (i < right)
+            {
+                Quicksort(students, i, right);
+            }
+        }
     }
 }
